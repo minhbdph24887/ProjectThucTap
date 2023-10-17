@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www/thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{:: main})}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ Hàng Của Tôi</title>
+</head>
+
+<body>
+<main>
+    <div class="panel panel-primary">
+        <div class="panel-heading">Giỏ Hàng Của Tôi</div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Tên Sản Phẩm</th>
+                <th>Ảnh Sản Phẩm</th>
+                <th>Giá</th>
+                <th>Số Lượng</th>
+                <th>Tổng Tiền</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="listProduct in cart.listProduct">
+                <td>{{listProduct.idProductItems}}</td>
+                <td>{{listProduct.product.nameProduct}}</td>
+                <td>
+                    <img ng-src="/images/{{listProduct.imagesProduct}}" style="width: 200px; height: 200px;" alt="" src=""/>
+                </td>
+                <td>{{listProduct.costPrice | number : 0}} VND</td>
+                <td>
+                    <input type="number" ng-change="cart.saveToLoaclStorage()" ng-model="listProduct.availableQuantity" min="1" style="width: 100px;">
+                </td>
+                <td>{{listProduct.availableQuantity * listProduct.costPrice | number : 0}} VND</td>
+                <td>
+                    <button ng-click="cart.remove(listProduct.idProduct)" class="btn btn-sm btn-danger">
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="panel-footer">
+            <button ng-click="cart.clear()" class="btn btn-danger">
+                <i class="glyphicon glyphicon-trash"></i> Xoá Tất Cả
+            </button>
+            <a th:href="@{|/order/checkout|}" class="btn btn-primary">
+                <i class="glyphicon glyphicon-hand-right"></i> Đặt Hàng
+            </a>
+            <p style="float: right;">Tổng tiền: {{cart.totalCost | number : 0}} VND</p>
+        </div>
+    </div>
+</main>
+</body>
+
+</html>

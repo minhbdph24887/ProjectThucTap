@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" th:replace="~{/layout/indexadmin :: dynamic(~{:: div})}">
+<head>
+    <meta charset="UTF-8">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!--bootstrap icon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+</head>
+<body>
+<div class="row">
+    <h1>Quản Lý Tài Khoản</h1>
+    <div class="navbar-nav">
+        <h3>Danh Sách Tài Khoản</h3>
+    </div>
+    <div class="navbar-right">
+        <a th:href="@{/admin/account/view-add}" class="btn btn-info">
+            <i class="bi bi-person-fill-add"></i>
+            Thêm Tài Khoản
+        </a>
+    </div>
+    <br>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>STT</th>
+            <th>Họ Và Tên</th>
+            <th>Giới Tính</th>
+            <th>Số Điện Thoại</th>
+            <th>Ngày Sinh</th>
+            <th>Dịa Chỉ</th>
+            <th>Trang Thái</th>
+            <th>Hành Động</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="listAccount, stat : ${listAccount}">
+            <td th:text="${stat.count}"></td>
+            <td th:text="${listAccount.nameUser}"></td>
+            <td th:text="${listAccount.sex ? 'Nam' : 'Nữ'}"></td>
+            <td th:text="${listAccount.numberPhone}"></td>
+            <td th:text="${#dates.format(listAccount.birthday, 'dd-MM-yyyy')}"></td>
+            <td th:text="${listAccount.address}"></td>
+            <td th:text="${listAccount.detailStatus()}"></td>
+            <td>
+                <a th:href="@{/admin/account/detail/{id}(id=${listAccount.userName})}" class="btn btn-primary"><i
+                        class="bi bi-eye-fill"></i></a>
+                <a th:href="@{/admin/account/delete/{id}(id=${listAccount.userName})}" class="btn btn-danger"><i
+                        class="bi bi-trash-fill"></i></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center pagination-sm">
+            <li th:each="i : ${#numbers.sequence(0, listAccount.totalPages - 1)}" th:class="${i == page ? 'active' : ''}"
+                class="page-item">
+                <a th:href="@{/admin/account(page=${i})}" class="page-link" th:text="${i + 1}"></a>
+            </li>
+        </ul>
+    </nav>
+</div>
+</body>
+</html>

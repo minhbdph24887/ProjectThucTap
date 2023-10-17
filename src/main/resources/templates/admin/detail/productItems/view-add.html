@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" th:replace="~{/layout/indexadmin :: dynamic(~{:: div})}">
+<head>
+    <meta charset="UTF-8">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!--bootstrap icon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+</head>
+<body>
+<div class="row">
+    <h3>Thêm Chi Tiết Sản Phẩm</h3>
+    <form th:action="@{/admin/productitems/add}" th:object="${productItems}" method="post">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label>Sản Phẩm: </label>
+                        <select name="product" class="form-control">
+                            <option th:each="listProduct : ${listProduct}" th:value="${listProduct.idProduct}"
+                                    th:text="${listProduct.nameProduct}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            <label>Màu Sắc: </label>
+                            <select name="color" class="form-control">
+                                <option value="">Chọn Màu Sắc</option>
+                                <option th:each="listColor : ${listColor}" th:value="${listColor.idColor}"
+                                        th:text="${listColor.nameColor}"></option>
+                            </select>
+                        </div>
+                        <div class="col-sm-6">
+                            <label></label>
+                            <p id="detailColorForCombobox" class="form-control"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label>Kích Cỡ: </label>
+                        <select name="size" class="form-control">
+                            <option th:each="listSize : ${listSize}" th:value="${listSize.idSize}"
+                                    th:text="${listSize.nameSize}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <label>Danh Mục: </label>
+                    <select name="category" class="form-control">
+                        <option th:each="category : ${listCategory}" th:value="${category.idCategory}"
+                                th:text="${category.nameCategory}"></option>
+                    </select>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label>Trạng Thái: </label>
+                        <input type="text" class="form-control" value="Đang Còn Hàng" readonly/>
+                        <input type="hidden" name="status" value="1"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="form-group">
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label>Số Lượng Tồn: </label>
+                        <input type="text" class="form-control" name="availableQuantity"
+                               placeholder="Nhập Số Lượng Sản Phẩm"/>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label>Giá Nhập: </label>
+                        <input type="text" class="form-control" name="purchasePrice"
+                               placeholder="Nhập Giá Mua Vào Của Sản Phẩm"/>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label>Giá Bán: </label>
+                        <input type="text" class="form-control" name="costPrice"
+                               placeholder="Nhập Giá Bán Của Sản Phẩm"/>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Ảnh Sản Phẩm: </label>
+                        <div class="col-sm-12">
+                            <div class="col-sm-7">
+                                <input type="file" id="imageInput" class="form-control" name="imagesProduct"
+                                       accept="image/*"/>
+                            </div>
+                            <div class="col-sm-5">
+                                <img id="previewImage" style="width: 200px; height: 200px;" alt=""/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="form-group">
+                <div class="col-sm-1">
+                    <button type="submit" class="btn btn-success"><i class="bi bi-floppy-fill"></i> Lưu Lại</button>
+                </div>
+                <div class="col-sm-1">
+                    <button type="reset" class="btn btn-primary"><i class="bi bi-arrow-clockwise"></i> Làm Mới</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

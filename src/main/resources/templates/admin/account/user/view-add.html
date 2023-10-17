@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" th:replace="~{/layout/indexadmin :: dynamic(~{:: div})}">
+<head>
+    <meta charset="UTF-8">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!--bootstrap icon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+</head>
+<body>
+<div class="row">
+    <h3>Thêm Tài Khoản</h3>
+    <form th:action="@{/admin/account/add}" th:object="${account}" method="post">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <div class="col-sm-2">
+                    <label>UserName: </label>
+                    <input type="text" class="form-control" name="userName" placeholder="Nhập Username"/>
+                </div>
+                <div class="col-sm-3">
+                    <label>Họ Và Tên: </label>
+                    <input type="text" class="form-control" name="nameUser" placeholder="Nhập Họ Và Tên"/>
+                </div>
+                <div class="col-sm-2">
+                    <label>Số Điện Thoại: </label>
+                    <input type="text" class="form-control" name="numberPhone" placeholder="Nhập Số Điện Thoại"/>
+                </div>
+                <div class="col-sm-3">
+                    <label>Giới Tính: </label>
+                    <div class="col-sm-12">
+                        <div class="col-sm-6">
+                            <label>
+                                <input type="radio" name="sex" value="1" th:text="Nam" checked="">
+                            </label>
+                        </div>
+                        <div class="col-sm-6">
+                            <label>
+                                <input type="radio" name="sex" value="0" th:text="Nữ">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <label>Trạng Thái: </label>
+                    <input type="text" class="form-control" value="Đang Hoạt Động" readonly/>
+                    <input type="hidden" name="status" value="1"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <br>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="form-group">
+                <div class="col-sm-2">
+                    <label>Ngày Sinh: </label>
+                    <input type="date" class="form-control" name="birthday"/>
+                </div>
+                <div class="col-sm-3">
+                    <label>Địa Chỉ: </label>
+                    <input type="text" class="form-control" name="address" placeholder="Nhập Địa Chỉ"/>
+                </div>
+                <div class="col-sm-5">
+                    <label>Password: </label>
+                    <div class="col-sm-12">
+                        <div class="col-sm-7">
+                            <input type="password" class="form-control" name="passWord" id="pwd"
+                                   placeholder="Nhập Mật Khẩu">
+                        </div>
+                        <div class="col-sm-5">
+                            <label for="chk">
+                                <input type="checkbox" id="chk"> Show Password
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <br>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="form-group">
+                <div class="col-sm-1">
+                    <button type="submit" class="btn btn-success">
+                        <i class="bi bi-floppy-fill"></i>
+                        Lưu Lại
+                    </button>
+                </div>
+                <div class="col-sm-1">
+                    <button type="reset" class="btn btn-primary">
+                        <i class="bi bi-arrow-clockwise"></i>
+                        Làm Mới
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>
